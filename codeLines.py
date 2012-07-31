@@ -5,10 +5,15 @@ ext = (".h", ".m", ".mm", ".java", ".cpp", ".py")
 
 def main() :
     directory = raw_input( "Provide your project path: " )
+    prefix = raw_input("Provide your file prefix or leave it empty: ")
     for root, dirs, files in os.walk(directory.strip()):
         for filename in files:
             if filename.endswith(ext):
-                printOutputForFile("%s/%s" % (root, filename))
+                if len(prefix) > 0:
+                    if filename.startswith(prefix):
+                        printOutputForFile("%s/%s" % (root, filename))
+                else:        
+                    printOutputForFile("%s/%s" % (root, filename))
     print 'Total lines of code: ', total
 
 def printOutputForFile(filename):
